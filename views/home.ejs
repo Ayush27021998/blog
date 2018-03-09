@@ -1,0 +1,14 @@
+<h1>Successfully Registered or logged in</h1><br>
+<form method="get" action="/create">
+    <input type="submit" value="CREATE POST">
+</form>
+
+
+<h2>All posts</h2>
+<ul>
+<%posts.forEach(function(post){%>
+        <li><h3><%=post.title%></h3><br><%=post.content%><br><h4>By: <%=post.createdBy%></h4></li><%if(user.username==post.createdBy)%>
+                <button><a href="/edit">Edit Post</a></button>
+<% }); %>
+    
+</ul>
