@@ -17,7 +17,7 @@ router.post('/register',function(req,res){
     });
     var password= req.body.password;
     user.register(newUser, password, function(err,user){
-       res.render('landing',user);
+       res.render('landing', {user: user});
     });
 });
 
@@ -27,4 +27,15 @@ router.post('/login',passport.authenticate('local', {
     }), function(req,res,err){
     
 });
+
+function isLoggedin(req,res,next){
+    if(req.isAuthenticated){
+        console.log('authenticated');
+        return next();
+    }
+    else{
+        res.redirect('/login');
+    }
+}
+
 module.exports=router;

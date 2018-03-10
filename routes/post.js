@@ -32,6 +32,27 @@ router.post('/create',isLoggedin,function(req,res){
     res.redirect('/home');
 });
 
+router.get('/edit/:id',isLoggedin,function(req,res){
+    post.find({_id: req.params.id},function(err,post){
+        res.render('edit',{posts: post});
+    });
+});
 
+router.post('/edit',function(req,res){
+    var newData={title: req.body.title, content: req.body.content};
+    post.findByIdAndUpdate(req.body.id,{$set: newData},function(err,post){
+        console.log(post);
+        res.redirect('/home/');
+    });
+});
 
+router.get('/delete/:id',function(req,res){
+    post.remove({_id: req.params.id},function(err){
+        if(err){
+            console.log(err);
+        }else{
+            res.redirect('/home');
+        }
+    });
+});
 module.exports= router;
