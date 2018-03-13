@@ -26,7 +26,8 @@ router.post('/create',isLoggedin,function(req,res){
     var newPost= new post({
         title: req.body.title,
         content: req.body.content,
-        createdBy: req.user.username
+        createdBy: req.user.username,
+        likes: 0,
     });
     newPost.save();
     res.redirect('/home');
@@ -43,6 +44,12 @@ router.post('/edit',function(req,res){
     post.findByIdAndUpdate(req.body.id,{$set: newData},function(err,post){
         console.log(post);
         res.redirect('/home/');
+    });
+});
+
+router.get('/like/:id',isLoggedin,function(req,res){
+    post.findByIdAndUpdate(req.params.id,{$inc: {likes:1}},function(err,post){
+        res.redirect('/home');
     });
 });
 
