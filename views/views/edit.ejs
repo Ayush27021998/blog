@@ -1,0 +1,11 @@
+<h1>Edit</h1>
+
+
+<form action='/edit' method="post">
+    <input type="hidden" name="id" value="<%=posts[0]._id%>">
+    <label for="title">Title:</label><br>
+    <input type="text" name="title" value= '<%=posts[0].title%>'><br>
+    <label for="content">Content:</label><br>
+    <input type="text" name="content" value= '<%=posts[0].content%>'><br>
+    <input type="submit" value='edit'>
+</form>
